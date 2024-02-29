@@ -1,0 +1,13 @@
+INSERT INTO adrec.productLarge (id, large) VALUES (1, '의생활');
+INSERT INTO adrec.productLarge (id, large) VALUES (2, '식생활');
+INSERT INTO adrec.productLarge (id, large) VALUES (3, '주거생활');
+INSERT INTO adrec.productLarge (id, large) VALUES (4, '유흥');
+INSERT INTO adrec.productLarge (id, large) VALUES (5, '내구재');
+INSERT INTO adrec.productLarge (id, large) VALUES (6, '자동차');
+INSERT INTO adrec.productLarge (id, large) VALUES (7, '유통');
+INSERT INTO adrec.productLarge (id, large) VALUES (8, '여행');
+INSERT INTO adrec.productLarge (id, large) VALUES (9, '레포츠/문화/취미');
+INSERT INTO adrec.productLarge (id, large) VALUES (10, '의료/미용');
+INSERT INTO adrec.productLarge (id, large) VALUES (11, '교육');
+INSERT INTO adrec.productLarge (id, large) VALUES (12, '서비스');
+INSERT INTO adrec.productLarge (id, large) VALUES (13, '기타');

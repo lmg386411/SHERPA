@@ -1,0 +1,39 @@
+@font-face {
+  font-family: "NANUMSQUARENEO-ALT";
+  src: url(./assets/fonts/NANUMSQUARENEO-ALT.TTF);
+}
+
+@font-face {
+  font-family: "NANUMSQUARENEO-BRG";
+  src: url(./assets/fonts/NANUMSQUARENEO-BRG.TTF);
+}
+
+@font-face {
+  font-family: "NANUMSQUARENEO-CBD";
+  src: url(./assets/fonts/NANUMSQUARENEO-CBD.TTF);
+}
+
+@font-face {
+  font-family: "NANUMSQUARENEO-DEB";
+  src: url(./assets/fonts/NANUMSQUARENEO-DEB.TTF);
+}
+
+@font-face {
+  font-family: "NANUMSQUARENEO-EHV";
+  src: url(./assets/fonts/NANUMSQUARENEO-EHV.TTF);
+}
+
+body {
+  margin: 0;
+  /* font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif; */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: "NANUMSQUARENEO-ALT";
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}

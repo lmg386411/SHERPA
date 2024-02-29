@@ -1,0 +1,12 @@
+INSERT INTO adrec.newsThemeGender (id, gender, theme, total) VALUES (1, 1, '정치', 360);
+INSERT INTO adrec.newsThemeGender (id, gender, theme, total) VALUES (2, 0, '정치', 200);
+INSERT INTO adrec.newsThemeGender (id, gender, theme, total) VALUES (3, 1, '사회', 250);
+INSERT INTO adrec.newsThemeGender (id, gender, theme, total) VALUES (4, 0, '사회', 360);
+INSERT INTO adrec.newsThemeGender (id, gender, theme, total) VALUES (5, 1, '경제', 280);
+INSERT INTO adrec.newsThemeGender (id, gender, theme, total) VALUES (6, 0, '경제', 270);
+INSERT INTO adrec.newsThemeGender (id, gender, theme, total) VALUES (7, 1, '문화', 30);
+INSERT INTO adrec.newsThemeGender (id, gender, theme, total) VALUES (8, 0, '문화', 90);
+INSERT INTO adrec.newsThemeGender (id, gender, theme, total) VALUES (9, 1, '스포츠 및 연예', 60);
+INSERT INTO adrec.newsThemeGender (id, gender, theme, total) VALUES (10, 0, '스포츠 및 연예', 60);
+INSERT INTO adrec.newsThemeGender (id, gender, theme, total) VALUES (11, 1, '기타', 20);
+INSERT INTO adrec.newsThemeGender (id, gender, theme, total) VALUES (12, 0, '기타', 20);

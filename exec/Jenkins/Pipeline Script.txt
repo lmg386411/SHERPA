@@ -1,0 +1,171 @@
+pipeline {
+    agent any 	// 사용 가능한 에이전트에서 이 파이프라인 또는 해당 단계를 실행
+    
+    tools {nodejs "NodeJS 18.16.1"}
+    
+    environment {
+        DOCKER_IMAGE_NAME_BE = 'jwyeon/sherpa_be' // 도커 허브 레포지토리
+        DOCKER_IMAGE_NAME_FE = 'jwyeon/sherpa_fe' // 도커 허브 레포지토리
+        DOCKER_IMAGE_NAME_DATA = 'jwyeon/sherpa_data' // 도커 허브 레포지토리
+        DOCKER_IMAGE_BE = ''
+        DOCKER_IMAGE_FE = ''
+        DOCKER_IMAGE_DATA = ''
+    }
+    
+    stages {
+        stage('Prepare') {
+            steps {
+                sh 'echo "Clonning Repository"'
+                git branch: 'develop',
+                credentialsId: 'gitlabId',
+                url: 'https://lab.ssafy.com/s09-bigdata-recom-sub2/S09P22C107.git'
+            }
+            post {
+                success { 
+                    sh 'echo "Successfully Cloned Repository"'
+                }
+                failure {
+                    sh 'echo "Fail Cloned Repository"'
+                }
+            }    
+        }
+        stage('Build Gradle') { 
+            steps {
+                sh 'echo "Bulid Gradle Start"'
+                dir ('./backend/spring') {
+                    // gradlew이 있어야됨. git clone해서 project를 가져옴.
+                    sh 'chmod +x gradlew'
+                    sh  './gradlew clean build --exclude-task test'
+                }
+            }
+            post {
+                success {
+                    echo 'gradle build success'
+                }
+                failure {
+                    echo 'gradle build failed'
+                }
+            }
+        }
+        stage('NPM Build') { 
+            steps {
+                sh 'echo "npm build"'
+                dir ('./frontend') {
+                    sh 'npm install'
+                    sh 'npm run build'
+                }
+            }
+            post {
+                success {
+                    echo 'npm build success'
+                }
+                failure {
+                    echo 'npm build failed'
+                }
+            }
+        }
+        stage('Bulid Docker Backend') {
+            steps {
+                sh 'echo " Image Bulid Start"'
+                dir ('./backend/spring') {
+                    script {
+                        DOCKER_IMAGE_BE = docker.build DOCKER_IMAGE_NAME_BE
+                    }
+                }
+            }
+            post {
+                failure {
+                    sh 'echo "Bulid Docker Fail"'
+                }
+            }
+        }
+        stage('Bulid Docker Frontend') {
+            steps {
+                sh 'echo " Image Bulid Start"'
+                dir ('./frontend') {
+                    script {
+                        DOCKER_IMAGE_FE = docker.build DOCKER_IMAGE_NAME_FE
+                    }
+                }
+            }
+            post {
+                failure {
+                    sh 'echo "Bulid Docker Fail"'
+                }
+            }
+        }
+        stage('Bulid Docker Data') {
+            steps {
+                sh 'echo " Image Bulid Start"'
+                dir ('./backend/fastapi') {
+                    script {
+                        DOCKER_IMAGE_DATA = docker.build DOCKER_IMAGE_NAME_DATA
+                    }
+                }
+            }
+            post {
+                failure {
+                    sh 'echo "Bulid Docker Fail"'
+                }
+            }
+        }
+        stage('Push Docker') {
+            steps {
+                sh 'echo "Docker Image Push Start"'
+                script {
+                    docker.withRegistry('https://registry.hub.docker.com', "docker-hub") {
+                        DOCKER_IMAGE_BE.push("latest")
+                    }
+                    docker.withRegistry('https://registry.hub.docker.com', "docker-hub") {
+                        DOCKER_IMAGE_FE.push("latest")
+                    }
+                    docker.withRegistry('https://registry.hub.docker.com', "docker-hub") {
+                        DOCKER_IMAGE_DATA.push("latest")
+                    } 
+                }
+            }
+            post {
+                success {
+                    sh 'docker stop spring-container'
+                    sh 'docker stop react-container'
+                    sh 'docker stop fastapi-container'
+                    sh 'docker rmi -f $(docker images -q -f dangling=true)'
+                }
+                failure {
+                    error 'This Image Push Fail'
+                }
+            }
+        }
+        stage('Remote Server Docker Pull') {
+            steps([$class: 'BapSshPromotionPublisherPlugin']) {
+                sh 'echo "Remote Server Docker Pull Start"'
+                 sshPublisher(
+                    continueOnError: false, failOnError: true,
+                    publishers: [
+                        sshPublisherDesc(
+                            configName: "EC2_C107",
+                            verbose: true,
+                            transfers: [
+                                sshTransfer(
+                                    execCommand: """
+                                        sh /home/scripts/spring-container.sh
+                                        sh /home/scripts/react-container.sh
+                                        sh /home/scripts/fastapi-container.sh
+                                    """
+                                )
+                            ]
+                        )
+                    ]
+                )
+            }
+            post {
+                 success {
+                    sh 'echo "Completed Remote Server Docker Pull"'
+                }
+                failure {
+                    sh 'echo "Fail Remote Server Docker Pull"'
+                }
+            }
+        }
+    }
+}

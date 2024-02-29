@@ -1,0 +1,16 @@
+INSERT INTO adrec.mediaLikeGender (id, gender, total, mediaSub_id, mediaType_id) VALUES (1, 0, 918, null, 1);
+INSERT INTO adrec.mediaLikeGender (id, gender, total, mediaSub_id, mediaType_id) VALUES (2, 0, 956, null, 2);
+INSERT INTO adrec.mediaLikeGender (id, gender, total, mediaSub_id, mediaType_id) VALUES (3, 0, 2034, null, 3);
+INSERT INTO adrec.mediaLikeGender (id, gender, total, mediaSub_id, mediaType_id) VALUES (4, 0, 212, null, 4);
+INSERT INTO adrec.mediaLikeGender (id, gender, total, mediaSub_id, mediaType_id) VALUES (5, 0, 1761, null, 5);
+INSERT INTO adrec.mediaLikeGender (id, gender, total, mediaSub_id, mediaType_id) VALUES (6, 0, 710, 1, 6);
+INSERT INTO adrec.mediaLikeGender (id, gender, total, mediaSub_id, mediaType_id) VALUES (7, 0, 710, 2, 6);
+INSERT INTO adrec.mediaLikeGender (id, gender, total, mediaSub_id, mediaType_id) VALUES (8, 0, 878, 3, 6);
+INSERT INTO adrec.mediaLikeGender (id, gender, total, mediaSub_id, mediaType_id) VALUES (9, 1, 864, null, 1);
+INSERT INTO adrec.mediaLikeGender (id, gender, total, mediaSub_id, mediaType_id) VALUES (10, 1, 900, null, 2);
+INSERT INTO adrec.mediaLikeGender (id, gender, total, mediaSub_id, mediaType_id) VALUES (11, 1, 2051, null, 3);
+INSERT INTO adrec.mediaLikeGender (id, gender, total, mediaSub_id, mediaType_id) VALUES (12, 1, 190, null, 4);
+INSERT INTO adrec.mediaLikeGender (id, gender, total, mediaSub_id, mediaType_id) VALUES (13, 1, 1863, null, 5);
+INSERT INTO adrec.mediaLikeGender (id, gender, total, mediaSub_id, mediaType_id) VALUES (14, 1, 720, 1, 6);
+INSERT INTO adrec.mediaLikeGender (id, gender, total, mediaSub_id, mediaType_id) VALUES (15, 1, 720, 2, 6);
+INSERT INTO adrec.mediaLikeGender (id, gender, total, mediaSub_id, mediaType_id) VALUES (16, 1, 892, 3, 6);
